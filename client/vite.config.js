@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 export default defineConfig({
@@ -11,6 +11,12 @@ export default defineConfig({
       closeBundle() {
         const distPath = join(__dirname, 'dist');
         writeFileSync(join(distPath, '.nojekyll'), '');
+        // Also create a 404.html for SPA routing
+        const indexPath = join(distPath, 'index.html');
+        if (existsSync(indexPath)) {
+          const indexContent = readFileSync(indexPath, 'utf-8');
+          writeFileSync(join(distPath, '404.html'), indexContent);
+        }
       },
     },
   ],

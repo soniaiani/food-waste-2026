@@ -49,7 +49,18 @@ jobs:
           echo "Checking index.html:"
           if [ -f index.html ]; then
             echo "✓ index.html exists"
-            head -20 index.html
+            echo "First 30 lines of index.html:"
+            head -30 index.html
+            echo ""
+            echo "Checking for JavaScript files:"
+            find . -name "*.js" -type f | head -10
+            echo ""
+            echo "Checking for .nojekyll:"
+            if [ -f .nojekyll ]; then
+              echo "✓ .nojekyll exists"
+            else
+              echo "✗ .nojekyll NOT FOUND!"
+            fi
           else
             echo "✗ index.html NOT FOUND!"
             exit 1
