@@ -40,6 +40,21 @@ jobs:
           VITE_API_BASE: ''
         run: npm run build
 
+      - name: Verify build output
+        working-directory: ./client/dist
+        run: |
+          echo "Build contents:"
+          ls -la
+          echo ""
+          echo "Checking index.html:"
+          if [ -f index.html ]; then
+            echo "✓ index.html exists"
+            head -20 index.html
+          else
+            echo "✗ index.html NOT FOUND!"
+            exit 1
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
