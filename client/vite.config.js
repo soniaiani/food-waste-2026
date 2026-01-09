@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/proiect_food_waste-main/',
+  base: '/food-waste-2026/',
   server: {
     proxy: {
       '/api': 'http://localhost:3000',
